@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pick Your Christmas Gift 🎁</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Warning Screen -->
+<div id="warning">
+  <h1>🎄 Christmas Gift 🎁</h1>
+  <p>⚠️ Contains jump scares & loud sounds</p>
+  <button onclick="startGame()">Enter</button>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="assets/music.mp3" loop></audio>
+
+<!-- Snow -->
+<div class="snow"></div>
+
+<!-- Main Game -->
+<div id="game" class="hidden">
+  <h2>Choose Your Gift 🎁</h2>
+  <div id="boxes">
+    <div class="box" onclick="pickBox(this)">🎁</div>
+    <div class="box" onclick="pickBox(this)">🎁</div>
+    <div class="box" onclick="pickBox(this)">🎁</div>
+  </div>
+  <p id="status"></p>
+</div>
+
+<!-- Jump Scare -->
+<div id="scare">
+  <img src="assets/scare.jpg">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
