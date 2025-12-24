@@ -29,7 +29,7 @@ function startShuffle() {
       clearInterval(shuffleInterval);
       stopShuffle();
     }
-  }, 400);
+  }, 250);
 }
 
 function stopShuffle() {
