@@ -110,7 +110,15 @@ body {
 
 /* SHUFFLE */
 .shuffle {
-  animation: shuffle 0.6s ease-in-out infinite alternate;
+  animation: shuffleChaos 0.5s ease-in-out infinite;
+}
+
+@keyframes shuffleChaos {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(-15px, -10px) rotate(-8deg); }
+  50%  { transform: translate(15px, 10px) rotate(8deg); }
+  75%  { transform: translate(-10px, 15px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 @keyframes shuffle {
