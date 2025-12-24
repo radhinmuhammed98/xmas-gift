@@ -1,39 +1,44 @@
-const bgMusic = document.getElementById("bgMusic");
-const scare = document.getElementById("scare");
-const statusText = document.getElementById("status");
+const bgMusic = new Audio("assets/music.mp3");
+const unwrapSound = new Audio("assets/unwrap.mp3");
+const scareSound = new Audio("assets/scare.mp3");
 
-function startGame() {
-  document.getElementById("warning").style.display = "none";
-  document.getElementById("game").classList.remove("hidden");
-  bgMusic.volume = 0.4;
+bgMusic.volume = 0.3;
+bgMusic.loop = true;
+
+let gifts = ["scare", "funny", "safe"].sort(() => Math.random() - 0.5);
+
+function start() {
   bgMusic.play();
-  shuffleBoxes();
 }
 
-function shuffleBoxes() {
-  const boxes = document.getElementById("boxes");
-  for (let i = boxes.children.length; i >= 0; i--) {
-    boxes.appendChild(boxes.children[Math.random() * i | 0]);
-  }
-}
+function pickBox(index, el) {
+  document.querySelectorAll(".gift").forEach(b => b.onclick = null);
 
-function pickBox(box) {
-  statusText.innerText = "Opening your gift...";
-  document.querySelectorAll(".box").forEach(b => b.style.pointerEvents = "none");
+  unwrapSound.play();
+  el.classList.add("open");
 
   setTimeout(() => {
-    triggerScare();
-  }, 1800);
+    if (gifts[index] === "scare") {
+      triggerScare();
+    } else if (gifts[index] === "funny") {
+      showMessage("🎅 You got socks!");
+    } else {
+      showMessage("🎁 A warm hug from Santa ❤️");
+    }
+  }, 1500);
 }
 
 function triggerScare() {
   bgMusic.pause();
-  scare.style.display = "block";
+  document.body.classList.add("scare-mode");
+  scareSound.play();
 
-  const audio = new Audio("assets/scare.mp3");
-  audio.volume = 1;
-  audio.play();
+  setTimeout(() => location.reload(), 2500);
+}
 
+function showMessage(msg) {
+  document.getElementById("message").innerText = msg;
+}
   setTimeout(resetGame, 2000);
 }
 
