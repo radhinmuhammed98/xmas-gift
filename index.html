@@ -17,32 +17,46 @@
 
 <div class="container">
 
-  <!-- Shuffle Button -->
-  <button id="shuffleBtn">🎅Shuffle it</button>
+<!-- Shuffle Button -->
+<button id="shuffleBtn">🎅 Shuffle it</button>
 
-  <!-- Gifts -->
-  <div class="gifts locked" id="gifts">
-    <div class="gift" data-name="Krampus 😈" data-sound="sound2">
-      <img src="https://preview.redd.it//where-are-all-these-sura-memes-coming-from-v0-iyz7oxm61inc1.png?width=1080&format=png&auto=webp&s=1cd4a5577ad869108486b780277eaa6cc1f43b9d" alt="Gift 1">
-    </div>
-    <div class="gift" data-name="Cursed Rizz 👀" data-sound="sound3">
-      <img src="https://preview.redd.it/whe/re-are-all-these-sura-memes-coming-from-v0-iyz7oxm61inc1.png?width=1080&format=png&auto=webp&s=1cd4a5577ad869108486b780277eaa6cc1f43b9d" alt="Gift 2">
-    </div>
-    <div class="gift" data-name="Santa’s Surprise 🎁" data-sound="sound1">
-      <img src="https://preview.redd.it/where-are-all-t/hese-sura-memes-coming-from-v0-iyz7oxm61inc1.png?width=1080&format=png&auto=webp&s=1cd4a5577ad869108486b780277eaa6cc1f43b9d" alt="Gift 3">
-    </div>
+<!-- Gifts -->
+<div class="gifts locked" id="gifts">
+  <div class="gift"
+       data-name="Krampus 😈"
+       data-sound="sound2"
+       data-img="reveal/bad1.png">
   </div>
+
+  <div class="gift"
+       data-name="Cursed Rizz 👀"
+       data-sound="sound3"
+       data-img="reveal/bad2.png">
+  </div>
+
+  <div class="gift"
+       data-name="Santa’s Surprise 🎁"
+       data-sound="sound1"
+       data-img="reveal/bad3.png">
+  </div>
+</div>
 
 <!-- Reveal Screen -->
 <div class="reveal" id="reveal">
   <div class="scareBox">
-    <div class="scareImage">😈</div>
+
+    <!-- REVEALED IMAGE -->
+    <img id="revealImg" alt="Revealed Gift">
+
+    <!-- REVEALED NAME -->
     <div class="scareName" id="scareName"></div>
 
+    <!-- ACTION BUTTONS -->
     <div class="actions">
       <button onclick="share()">📸 Share</button>
       <button onclick="retry()">🔁 Retry</button>
     </div>
+
   </div>
 </div>
 
