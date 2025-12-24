@@ -25,7 +25,7 @@ function startShuffle() {
     [...gifts].sort(() => Math.random() - 0.5)
       .forEach(g => parent.appendChild(g));
     count++;
-    if (count === 5) {
+    if (count === 7) {
       clearInterval(shuffleInterval);
       stopShuffle();
     }
