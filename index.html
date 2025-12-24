@@ -23,15 +23,14 @@
 <div class="snow"></div>
 
 <!-- Main Game -->
-<div id="game" class="hidden">
-  <h2>Choose Your Gift 🎁</h2>
-  <div id="boxes">
-    <div class="box" onclick="pickBox(this)">🎁</div>
-    <div class="box" onclick="pickBox(this)">🎁</div>
-    <div class="box" onclick="pickBox(this)">🎁</div>
-  </div>
-  <p id="status"></p>
+<div class="gifts">
+  <div class="gift" onclick="pickBox(0,this)"></div>
+  <div class="gift" onclick="pickBox(1,this)"></div>
+  <div class="gift" onclick="pickBox(2,this)"></div>
 </div>
+
+<p id="message"></p>
+
 
 <!-- Jump Scare -->
 <div id="scare">
