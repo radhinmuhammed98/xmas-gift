@@ -1,28 +1,124 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+/* LIVE BACKGROUND */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, #ff5252, transparent),
+    radial-gradient(circle at bottom, #0f9b8e, #000);
+  animation: bgmove 10s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes bgmove {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(40deg); }
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* BUTTON */
+#shuffleBtn {
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #e53935;
+  color: white;
+}
+
+/* GIFTS */
+.gifts {
+  display: flex;
+  gap: 20px;
+}
+
 .gift {
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(#c62828, #8e0000);
-  border-radius: 10px;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(#d32f2f, #8e0000);
+  border-radius: 12px;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 20px 40px rgba(0,0,0,.4);
-  transition: transform .4s;
+  box-shadow: 0 15px 30px rgba(0,0,0,.5);
+  transition: transform .3s;
 }
 
 .gift::before {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 120px;
+  width: 18px;
+  height: 100%;
   background: gold;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .gift:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
 }
 
-.gift.open {
-  transform: scale(1.1) rotate(3deg);
+.open {
+  animation: open 0.4s forwards;
+}
+
+@keyframes open {
+  to { transform: scale(1.15) rotate(4deg); }
+}
+
+/* JUMPSCARE */
+#scare {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#scareText {
+  font-size: 3rem;
+  animation: shake .1s infinite;
+}
+
+@keyframes shake {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* RESULT */
+#result {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  gap: 15px;
+}
+
+#result button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
