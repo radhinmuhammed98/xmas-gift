@@ -2,40 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pick Your Christmas Gift 🎁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins&display=swap" rel="stylesheet">
+<title>Santa Gift 🎁</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Warning Screen -->
-<div id="warning">
-  <h1>🎄 Christmas Gift 🎁</h1>
-  <p>⚠️ Contains jump scares & loud sounds</p>
-  <button onclick="startGame()">Enter</button>
+<!-- LIVE BACKGROUND -->
+<div class="bg"></div>
+
+<div class="container">
+
+  <button id="shuffleBtn">🎅 സമ്മാനം കലക്കൂ</button>
+
+  <div class="gifts" id="gifts">
+    <div class="gift" data-name="ക്രാമ്പസ് 😈"></div>
+    <div class="gift" data-name="ഭയങ്കര സമ്മാനം 👀"></div>
+    <div class="gift" data-name="സാന്തയുടെ സർപ്രൈസ് 🎄"></div>
+  </div>
+
 </div>
 
-<!-- Background Music -->
-<audio id="bgMusic" src="assets/music.mp3" loop></audio>
-
-<!-- Snow -->
-<div class="snow"></div>
-
-<!-- Main Game -->
-<div class="gifts">
-  <div class="gift" onclick="pickBox(0,this)"></div>
-  <div class="gift" onclick="pickBox(1,this)"></div>
-  <div class="gift" onclick="pickBox(2,this)"></div>
-</div>
-
-<p id="message"></p>
-
-
-<!-- Jump Scare -->
+<!-- JUMPSCARE -->
 <div id="scare">
-  <img src="assets/scare.jpg">
+  <div id="scareText"></div>
 </div>
+
+<!-- RESULT -->
+<div id="result">
+  <button onclick="retry()">🔁 വീണ്ടും ശ്രമിക്കൂ</button>
+  <button onclick="share()">📸 Instagram Share</button>
+</div>
+
+<audio id="scareSound">
+  <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQQAAAA=">
+</audio>
 
 <script src="script.js"></script>
 </body>
