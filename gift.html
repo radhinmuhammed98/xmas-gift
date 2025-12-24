@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Gift 🎁</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #FFAFCC, #A2D2FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Floating glow blobs */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, #FFC8DD55, transparent 40%),
+    radial-gradient(circle at 80% 60%, #BDE0FE55, transparent 40%);
+  animation: floatBg 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatBg {
+  from { transform: translateY(0); }
+  to { transform: translateY(-30px); }
+}
+
+.app {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #5a3d5c;
+}
+
+/* Gifts */
+.gifts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.gift {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #FFAFCC, #FFC8DD);
+  box-shadow: 0 12px 25px rgba(255, 175, 204, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  transition: transform 0.2s ease;
+}
+
+.gift:hover {
+  transform: scale(1.08);
+}
+
+.locked .gift {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Shuffle animation */
+.shuffle .gift {
+  animation: chaos 0.4s infinite;
+}
+
+@keyframes chaos {
+  0% { transform: translate(0,0) rotate(0); }
+  25% { transform: translate(-12px,-8px) rotate(-8deg); }
+  50% { transform: translate(12px,8px) rotate(8deg); }
+  75% { transform: translate(-8px,12px) rotate(-5deg); }
+  100% { transform: translate(0,0) rotate(0); }
+}
+
+/* Reveal */
+.reveal {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.scareBox {
+  background: white;
+  padding: 30px;
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  text-align: center;
+  animation: pop 0.4s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#revealImg {
+  max-width: 80vw;
+  max-height: 50vh;
+  margin-bottom: 15px;
+}
+
+.scareName {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #5a3d5c;
+}
+
+.actions button {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.actions button:first-child {
+  background: #BDE0FE;
+}
+
+.actions button:last-child {
+  background: #FFAFCC;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <h1>Pick one gift 🎁</h1>
+
+  <div class="gifts locked shuffle" id="gifts">
+    <div class="gift" data-name="Krampus 😈" data-sound="sound2" data-img="reveal/bad1.png">🎁</div>
+    <div class="gift" data-name="Cursed Rizz 👀" data-sound="sound3" data-img="reveal/bad2.png">🎁</div>
+    <div class="gift" data-name="Santa’s Surprise 🎀" data-sound="sound1" data-img="reveal/bad3.png">🎁</div>
+  </div>
+</div>
+
+<!-- Reveal -->
+<div class="reveal" id="reveal">
+  <div class="scareBox">
+    <img id="revealImg">
+    <div class="scareName" id="scareName"></div>
+
+    <div class="actions">
+      <button onclick="share()">📸 Share</button>
+      <button onclick="retry()">🔁 Retry</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sounds -->
+<audio id="sound1" src="sounds/gift1.mp3"></audio>
+<audio id="sound2" src="sounds/gift2.mp3"></audio>
+<audio id="sound3" src="sounds/gift3.mp3"></audio>
+
+<script>
+const gifts = document.getElementById("gifts");
+const reveal = document.getElementById("reveal");
+const revealImg = document.getElementById("revealImg");
+const scareName = document.getElementById("scareName");
+
+window.onload = () => {
+  setTimeout(() => {
+    gifts.classList.remove("shuffle", "locked");
+  }, 2000);
+};
+
+document.querySelectorAll(".gift").forEach(gift => {
+  gift.onclick = () => {
+    if (gifts.classList.contains("locked")) return;
+    gifts.classList.add("locked");
+
+    setTimeout(() => {
+      revealGift(
+        gift.dataset.name,
+        gift.dataset.sound,
+        gift.dataset.img
+      );
+    }, 180);
+  };
+});
+
+function playSound(id) {
+  const s = document.getElementById(id);
+  if (!s) return;
+  s.currentTime = 0;
+  s.play();
+}
+
+function revealGift(name, soundId, img) {
+  scareName.innerText = name;
+  revealImg.src = img;
+  reveal.style.display = "flex";
+  playSound(soundId);
+}
+
+function retry() {
+  reveal.style.display = "none";
+  revealImg.src = "";
+  gifts.classList.add("locked", "shuffle");
+
+  setTimeout(() => {
+    gifts.classList.remove("shuffle", "locked");
+  }, 2000);
+}
+
+function share() {
+  alert("Share this with your pookie 💕");
+}
+</script>
+
+</body>
+      </html>
