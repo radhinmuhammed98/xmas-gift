@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Tiny Christmas Gift 🎁</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: linear-gradient(135deg, #FFC8DD, #BDE0FE);
+      overflow: hidden;
+    }
+
+    /* Soft floating hearts */
+    body::before {
+      content: "💖 💕 🎀 💗";
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.15;
+      animation: float 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes float {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 30px;
+      max-width: 420px;
+      width: 90%;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #5a3d5c;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #6b4f6f;
+      margin-bottom: 30px;
+    }
+
+    .pookie-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #FFAFCC, #FFC8DD);
+      color: #4b2c4d;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(255, 175, 204, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pookie-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(255, 175, 204, 0.8);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>For My Pookie 🎄</h1>
+
+    <p>
+      Christmas is about small surprises, warm smiles,<br>
+      and moments that make our hearts feel soft.<br><br>
+      This is a tiny gift — just for you 💗
+    </p>
+
+    <!-- LINK TO PAGE 2 -->
+    <a href="gift.html" class="pookie-btn">
+      Open My Gift 🎁
+    </a>
+
+    <div class="footer">
+      Made with a little Christmas magic ✨
+    </div>
+  </div>
+
+</body>
+</html>
