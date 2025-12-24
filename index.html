@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Santa Gift 🎁</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rizzmas 🎄</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LIVE BACKGROUND -->
-<div class="bg"></div>
+<!-- Snow Background -->
+<div class="snow"></div>
+
+<h1 class="title">Rizzmas 🎄</h1>
 
 <div class="container">
 
+  <!-- Shuffle Button -->
   <button id="shuffleBtn">🎅 സമ്മാനം കലക്കൂ</button>
 
-  <div class="gifts" id="gifts">
-    <div class="gift" data-name="ക്രാമ്പസ് 😈"></div>
-    <div class="gift" data-name="ഭയങ്കര സമ്മാനം 👀"></div>
-    <div class="gift" data-name="സാന്തയുടെ സർപ്രൈസ് 🎄"></div>
+  <!-- Gifts -->
+  <div class="gifts locked" id="gifts">
+    <div class="gift" data-name="Krampus 😈"></div>
+    <div class="gift" data-name="Cursed Rizz 👀"></div>
+    <div class="gift" data-name="Santa’s Surprise 🎁"></div>
   </div>
 
 </div>
 
-<!-- JUMPSCARE -->
-<div id="scare">
-  <div id="scareText"></div>
-</div>
+<!-- Reveal Screen -->
+<div class="reveal" id="reveal">
+  <div class="scareBox">
+    <div class="scareImage">😈</div>
+    <div class="scareName" id="scareName"></div>
 
-<!-- RESULT -->
-<div id="result">
-  <button onclick="retry()">🔁 വീണ്ടും ശ്രമിക്കൂ</button>
-  <button onclick="share()">📸 Instagram Share</button>
+    <div class="actions">
+      <button onclick="share()">📸 Share</button>
+      <button onclick="retry()">🔁 Retry</button>
+    </div>
+  </div>
 </div>
 
 <audio id="scareSound">
-  <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQQAAAA=">
+  <!-- Silent placeholder (replace later safely) -->
+  <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=">
 </audio>
 
 <script src="script.js"></script>
