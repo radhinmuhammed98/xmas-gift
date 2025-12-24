@@ -7,27 +7,41 @@ body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
+  background: #071b24;
   color: white;
 }
 
-/* LIVE BACKGROUND */
-.bg {
+/* TITLE */
+.title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* SNOW BACKGROUND */
+.snow::before {
+  content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at top, #ff5252, transparent),
-    radial-gradient(circle at bottom, #0f9b8e, #000);
-  animation: bgmove 10s infinite alternate;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(2px 2px at 100px 150px, white, transparent),
+    radial-gradient(2px 2px at 200px 80px, white, transparent);
+  background-size: 250px 250px;
+  animation: snow 12s linear infinite;
+  opacity: 0.5;
   z-index: -1;
 }
 
-@keyframes bgmove {
-  from { filter: hue-rotate(0deg); }
-  to { filter: hue-rotate(40deg); }
+@keyframes snow {
+  from { background-position: 0 0; }
+  to { background-position: 0 250px; }
 }
 
+/* MAIN */
 .container {
-  height: 100vh;
+  height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,11 +53,12 @@ body {
 #shuffleBtn {
   padding: 14px 26px;
   font-size: 1.1rem;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
-  cursor: pointer;
   background: #e53935;
   color: white;
+  cursor: pointer;
+  z-index: 5;
 }
 
 /* GIFTS */
@@ -52,13 +67,17 @@ body {
   gap: 20px;
 }
 
+.gifts.locked {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 .gift {
   width: 90px;
   height: 90px;
   background: linear-gradient(#d32f2f, #8e0000);
-  border-radius: 12px;
+  border-radius: 14px;
   position: relative;
-  cursor: pointer;
   box-shadow: 0 15px 30px rgba(0,0,0,.5);
   transition: transform .3s;
 }
@@ -73,52 +92,72 @@ body {
   transform: translateX(-50%);
 }
 
-.gift:hover {
-  transform: translateY(-8px);
+.gift.clickable {
+  cursor: pointer;
 }
 
-.open {
-  animation: open 0.4s forwards;
+.gift.clickable:hover {
+  transform: translateY(-10px);
 }
 
-@keyframes open {
+.gift.open {
+  animation: openGift 0.4s forwards;
+}
+
+@keyframes openGift {
   to { transform: scale(1.15) rotate(4deg); }
 }
 
-/* JUMPSCARE */
-#scare {
+/* SHUFFLE */
+.shuffle {
+  animation: shuffle 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes shuffle {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(10px); }
+}
+
+/* REVEAL */
+.reveal {
   position: fixed;
   inset: 0;
-  background: black;
+  background: rgba(0,0,0,0.85);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 999;
 }
 
-#scareText {
-  font-size: 3rem;
-  animation: shake .1s infinite;
+.scareBox {
+  text-align: center;
 }
 
-@keyframes shake {
+.scareImage {
+  font-size: 6rem;
+  animation: jump 0.2s infinite alternate;
+}
+
+@keyframes jump {
   from { transform: scale(1); }
-  to { transform: scale(1.05); }
+  to { transform: scale(1.1); }
 }
 
-/* RESULT */
-#result {
-  position: fixed;
-  bottom: 30px;
-  width: 100%;
-  display: none;
-  justify-content: center;
+.scareName {
+  margin-top: 15px;
+  font-size: 1.5rem;
+}
+
+.actions {
+  margin-top: 25px;
+  display: flex;
   gap: 15px;
+  justify-content: center;
 }
 
-#result button {
+.actions button {
   padding: 12px 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
 }
