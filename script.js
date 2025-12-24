@@ -56,16 +56,16 @@ gifts.forEach(gift => {
     gift.classList.add("open");
 
     setTimeout(() => {
-      revealGift(gift.dataset.name);
+      revealGift(gift.dataset.name, gift.dataset.sound);
     }, 450);
   };
 });
 
 /* REVEAL */
-function revealGift(name) {
+function revealGift(name, soundId) {
   scareName.innerText = name;
   reveal.style.display = "flex";
-  sound.play();
+  playSound(soundId);
 }
 
 /* RETRY */
