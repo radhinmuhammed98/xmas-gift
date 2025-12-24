@@ -251,7 +251,19 @@ function retry() {
 }
 
 function share() {
-  alert("Share this with your pookie 💕");
+  if (navigator.share) {
+    navigator.share({
+      title: "A Tiny Christmas Gift 🎁",
+      text: "I made a cute Christmas gift for you 💗🎄",
+      url: "https://kirmas.asmakal.xo.je/"
+    }).catch(() => {});
+  } else {
+    // fallback for old browsers / PC
+    prompt(
+      "Copy this link and share it with your pookie 💕",
+      "https://kirmas.asmakal.xo.je/"
+    );
+  }
 }
 </script>
 
