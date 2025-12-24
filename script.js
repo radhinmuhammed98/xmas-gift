@@ -3,9 +3,15 @@ const giftsWrap = document.getElementById("gifts");
 const gifts = document.querySelectorAll(".gift");
 const reveal = document.getElementById("reveal");
 const scareName = document.getElementById("scareName");
-const sound = document.getElementById("scareSound");
 
 let canClick = false;
+
+function playSound(id) {
+  const s = document.getElementById(id);
+  if (!s) return;
+  s.currentTime = 0;
+  s.play();
+}
 
 /* BUTTON CLICK */
 shuffleBtn.onclick = () => {
