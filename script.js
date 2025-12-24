@@ -1,50 +1,59 @@
-const bgMusic = new Audio("assets/music.mp3");
-const unwrapSound = new Audio("assets/unwrap.mp3");
-const scareSound = new Audio("assets/scare.mp3");
+const shuffleBtn = document.getElementById("shuffleBtn");
+const gifts = document.querySelectorAll(".gift");
+const scare = document.getElementById("scare");
+const scareText = document.getElementById("scareText");
+const result = document.getElementById("result");
+const sound = document.getElementById("scareSound");
 
-bgMusic.volume = 0.3;
-bgMusic.loop = true;
+shuffleBtn.onclick = () => {
+  shuffleBtn.style.display = "none";
+  shuffleGifts();
+};
 
-let gifts = ["scare", "funny", "safe"].sort(() => Math.random() - 0.5);
+gifts.forEach(gift => {
+  gift.onclick = () => openGift(gift);
+});
 
-function start() {
-  bgMusic.play();
+function shuffleGifts() {
+  const parent = document.getElementById("gifts");
+  [...gifts].sort(() => Math.random() - 0.5)
+    .forEach(g => parent.appendChild(g));
 }
 
-function pickBox(index, el) {
-  document.querySelectorAll(".gift").forEach(b => b.onclick = null);
-
-  unwrapSound.play();
-  el.classList.add("open");
+function openGift(gift) {
+  gifts.forEach(g => g.onclick = null);
+  gift.classList.add("open");
 
   setTimeout(() => {
-    if (gifts[index] === "scare") {
-      triggerScare();
-    } else if (gifts[index] === "funny") {
-      showMessage("🎅 You got socks!");
-    } else {
-      showMessage("🎁 A warm hug from Santa ❤️");
-    }
-  }, 1500);
+    jumpscare(gift.dataset.name);
+  }, 400);
 }
 
-function triggerScare() {
-  bgMusic.pause();
-  document.body.classList.add("scare-mode");
-  scareSound.play();
+function jumpscare(name) {
+  scareText.innerText = name;
+  scare.style.display = "flex";
+  sound.play();
 
-  setTimeout(() => location.reload(), 2500);
+  setTimeout(() => {
+    scare.style.display = "none";
+    result.style.display = "flex";
+  }, 1200);
 }
 
-function showMessage(msg) {
-  document.getElementById("message").innerText = msg;
-}
-  setTimeout(resetGame, 2000);
+function retry() {
+  result.style.display = "none";
+  shuffleBtn.style.display = "block";
+
+  gifts.forEach(g => {
+    g.classList.remove("open");
+    g.onclick = () => openGift(g);
+  });
 }
 
-function resetGame() {
-  scare.style.display = "none";
-  statusText.innerText = "Try again 😈";
-  document.querySelectorAll(".box").forEach(b => b.style.pointerEvents = "auto");
-  shuffleBoxes();
+function share() {
+  navigator.share?.({
+    title: "Santa Gift 🎁",
+    text: "ഈ സൈറ്റിൽ ഒരു സമ്മാനം തുറക്കൂ 😈🎄",
+    url: location.href
+  });
 }
