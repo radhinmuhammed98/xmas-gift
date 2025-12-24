@@ -56,14 +56,18 @@ h1 {
 
 /* Gifts layout */
 .gifts {
-  display: flex;
-  justify-content: center;
-  gap: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 18px;
+  justify-items: center;
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .gift {
-  width: 95px;
-  height: 95px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 95px;
   border-radius: 24px;
   background: linear-gradient(135deg, #FFAFCC, #FFC8DD);
   box-shadow: 0 12px 25px rgba(255, 175, 204, 0.6);
@@ -146,10 +150,18 @@ h1 {
 .actions button:last-child {
   background: #FFAFCC;
 }
+#snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 </style>
 </head>
 
 <body>
+<canvas id="snow"></canvas>
 
 <div class="app">
   <h1>Pick your gift 🎁</h1>
@@ -158,7 +170,12 @@ h1 {
     <div class="gift" data-name="Krampus 😈" data-sound="sound2" data-img="reveal/bad1.png">🎁</div>
     <div class="gift" data-name="Cursed Rizz 👀" data-sound="sound3" data-img="reveal/bad2.png">🎁</div>
     <div class="gift" data-name="Santa’s Surprise 🎀" data-sound="sound1" data-img="reveal/bad3.png">🎁</div>
-  </div>
+
+    <div class="gift" data-name="Unholy Cute 😳" data-sound="sound1" data-img="reveal/bad4.png">🎁</div>
+    <div class="gift" data-name="Pookie Gone Wrong 💀" data-sound="sound2" data-img="reveal/bad5.png">🎁</div>
+    <div class="gift" data-name="Final Rizz 😵‍💫" data-sound="sound3" data-img="reveal/bad6.png">🎁</div>
+</div>
+
 </div>
 
 <!-- REVEAL SCREEN -->
@@ -222,6 +239,46 @@ function retry() {
 function share() {
   alert("Share this with your pookie 💕");
 }
+</script>
+
+<script>
+const snowCanvas = document.getElementById("snow");
+const sctx = snowCanvas.getContext("2d");
+let sw, sh;
+let snowflakes = [];
+
+function resizeSnow() {
+  sw = snowCanvas.width = window.innerWidth;
+  sh = snowCanvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeSnow);
+resizeSnow();
+
+for (let i = 0; i < 80; i++) {
+  snowflakes.push({
+    x: Math.random() * sw,
+    y: Math.random() * sh,
+    r: Math.random() * 3 + 1,
+    d: Math.random() * 0.6 + 0.4
+  });
+}
+
+function snowLoop() {
+  sctx.clearRect(0, 0, sw, sh);
+  sctx.fillStyle = "rgba(255,255,255,0.9)";
+  snowflakes.forEach(f => {
+    sctx.beginPath();
+    sctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    sctx.fill();
+    f.y += f.d;
+    if (f.y > sh) {
+      f.y = -5;
+      f.x = Math.random() * sw;
+    }
+  });
+  requestAnimationFrame(snowLoop);
+}
+snowLoop();
 </script>
 
 </body>
