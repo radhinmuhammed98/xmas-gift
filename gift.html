@@ -222,7 +222,9 @@ const scareName = document.getElementById("scareName");
 
 document.querySelectorAll(".gift").forEach(gift => {
   gift.onclick = () => {
+    stopMusicPermanently(); // 🔥 stop background music
     gifts.classList.add("locked");
+
 
     setTimeout(() => {
       revealGift(
