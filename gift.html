@@ -218,7 +218,6 @@ const scareName = document.getElementById("scareName");
 
 document.querySelectorAll(".gift").forEach(gift => {
   gift.onclick = () => {
-    stopMusicPermanently(); // 🔥 stop background music
     gifts.classList.add("locked");
 
 
@@ -309,47 +308,6 @@ function snowLoop() {
 snowLoop();
 </script>
 
-<script>
-const music = document.getElementById("bgMusic");
-let musicAllowed = false;
-let permanentlyStopped = false;
-
-/* Start music only after user interaction */
-function startMusic() {
-  if (musicAllowed || permanentlyStopped) return;
-  musicAllowed = true;
-  music.volume = 0.35;
-  music.play().catch(() => {});
-}
-
-/* Stop music safely */
-function stopMusic() {
-  if (!music.paused) music.pause();
-}
-
-/* Page visibility change (tab switch / minimize) */
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    stopMusic();
-  } else if (musicAllowed && !permanentlyStopped) {
-    music.play().catch(() => {});
-  }
-});
-
-/* Auto stop when page loses focus (extra safety) */
-window.addEventListener("blur", stopMusic);
-window.addEventListener("focus", () => {
-  if (musicAllowed && !permanentlyStopped) {
-    music.play().catch(() => {});
-  }
-});
-
-/* Stop music permanently (when gift opens) */
-function stopMusicPermanently() {
-  permanentlyStopped = true;
-  stopMusic();
-}
-</script>
 
 </body>
 </html>
